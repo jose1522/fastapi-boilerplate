@@ -1,0 +1,17 @@
+signUp:
+  id: d-d8cc9c099ddc4d3b8a92e863ab8d33e2
+  subject: Test
+  dynamicData:
+    actionLink: www.google.com
+
+signUpConfirmation:
+  id: 22123123123
+  subject: kasdaisdoasd
+  dynamicData:
+    actionLink: www.google.com
+
+recoverPassword:
+  id: 22123123123
+  subject: kasdaisdoasd
+  dynamicData:
+    actionLink: www.google.com

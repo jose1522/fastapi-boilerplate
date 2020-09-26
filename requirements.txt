@@ -1,0 +1,9 @@
+flask
+pandas
+python-dotenv
+requests
+flask-wtf
+flask-session
+redis
+pyyaml
+sqlalchemy
