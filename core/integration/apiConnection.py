@@ -1,8 +1,9 @@
 import requests
 import json
 
+
 class API:
-    def __init__(self, url:str, method:str="GET"):
+    def __init__(self, url: str, method: str="GET"):
         self._url = url
         self.method = method
         self._headers = {}
@@ -13,11 +14,11 @@ class API:
     def addToHeaders(self, key, value):
         self._headers.update({key: value})
 
-    def addDictToHeaders(self, myDict:dict):
+    def addDictToHeaders(self, myDict: dict):
         for key, value in myDict.items():
             self.addToHeaders(key,value)
 
-    def setData(self, dataString:str):
+    def setData(self, dataString: str):
         self.data = dataString
 
     def sendCall(self):

@@ -1,9 +1,10 @@
-flask
-pandas
+wheel
+fastapi
+python-jose
+bcrypt
+pydantic
 python-dotenv
+mongoengine
+uvicorn
 requests
-flask-wtf
-flask-session
-redis
-pyyaml
-sqlalchemy
+
