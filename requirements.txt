@@ -11,3 +11,4 @@ pytest
 PyYAML
 bleach
 cryptography
+python-multipart
