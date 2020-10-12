@@ -12,31 +12,32 @@ import bcrypt
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 
-def get_hashed_password(password: str):
+def get_hash(password: str):
     password = password.encode('utf8')
     password = bcrypt.hashpw(password, bcrypt.gensalt()).decode('utf8')
     return password
 
 
-async def check_password(inputCredentials: UserParams):
+async def check_password(inputCredentials: dict):
     msg = AuthMessage()
-
-    # transform input
-    inputCredentials = dict(inputCredentials)
 
     # get user by username
     inputPassword = inputCredentials.get('password').encode('utf8')
-    user = await model.User.searchUser(inputCredentials.get('username'))
-    userPassword = user.get('password').encode('utf8')
+    user = await model.User.searchUser(inputCredentials.get('username'), include_pwd=True)
+    if user:
+        userPassword = user.get('password').encode('utf8')
 
-    # check passwords
-    result = bcrypt.checkpw(inputPassword, userPassword)
-    msg.authResult(result)
+        # check passwords
+        result = bcrypt.checkpw(inputPassword, userPassword)
+        msg.authResult(result)
 
-    # add token if the passwords match
-    if result:
-        token = create_access_token(user)
-        msg.addMessage('Token', token)
+        # add token if the passwords match
+        if result:
+            user = {'username': user.get("username",None)}
+            token = create_access_token(user)
+            msg.addMessage('Token', token)
+    else:
+        msg.addMessage('Error','Invalid Credentials')
     return msg
 
 
@@ -61,7 +62,8 @@ async def get_current_user(token: str) -> dict:
         data = jwt.decode(token, settings.ENCRYPTION_KEY, algorithms=[settings.ENCRYPTION_ALGORITHM])
         username: str = data.get("username")
         user = await model.User.searchUser(username)
-        del user['password']
+        # user = await model.User.searchUserDecrypt(username)
+        # return user[0]
         return user
     except JWTError:
         raise credentials_exception

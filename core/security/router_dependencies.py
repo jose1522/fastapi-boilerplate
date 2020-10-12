@@ -9,5 +9,8 @@ async def check_token(x_token: str = Header(...)):
 
 
 async def check_jwt(token: str = Depends(oauth2_scheme)):
-    data = await get_current_user(token)
-    return data
+    try:
+        data = await get_current_user(token)
+        return data
+    except Exception as e:
+        raise HTTPException(status_code=401, detail='Authentication Error')

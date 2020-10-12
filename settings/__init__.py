@@ -15,9 +15,11 @@ class Settings:
         self.ENCRYPTION_ALGORITHM = os.environ.get('ENCRYPTION_ALGORITHM')
         self.API_WORKERS = int(os.environ.get('API_WORKERS'))
         self.API_PORT = int(os.environ.get('API_PORT'))
-        self.API_USE_SSL = bool(os.environ.get('API_USE_SSL'))
-        self.MONGO_BROKER_DB = os.environ.get('MONGO_BROKER_DB')
-        self.API_RELOAD = bool(os.environ.get('API_RELOAD'))
+        self.API_USE_SSL = os.environ.get('API_USE_SSL') == 'True'
+        self.BROKER_HOST = os.environ.get('BROKER_HOST')
+        self.API_RELOAD = os.environ.get('API_RELOAD') == 'True'
+        self.API_SUPER_USER = os.environ.get('API_SUPER_USER').split(":")
+        self.DB_ENCRYPTION_KEY = os.environ.get('DB_ENCRYPTION_KEY')
 
 
 settings = Settings()

@@ -7,4 +7,7 @@ python-dotenv
 mongoengine
 uvicorn
 requests
-
+pytest
+PyYAML
+bleach
+cryptography
