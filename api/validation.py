@@ -10,3 +10,6 @@ class UserParams(BaseModel):
 class TokenParams(BaseModel):
     access_token: str
     token_type: str
+
+class ObjectID(BaseModel):
+    id: str
